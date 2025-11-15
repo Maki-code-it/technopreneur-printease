@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop - PrintEase Digital Printing</title>
+    <link rel="stylesheet" href="../CSS_Files/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo" onclick="window.location.href='index.html'">
+                <div class="logo-icon">P</div>
+                <span class="logo-text">PrintEase</span>
+            </div>
+            <div class="nav-menu" id="navMenu">
+                <a href="index.html" class="nav-link">HOME</a>
+                <a href="about.html" class="nav-link">ABOUT US</a>
+                <a href="shop.html" class="nav-link active">SHOP</a>
+                <a href="contact.html" class="nav-link">CONTACT</a>
+                <a href="cart.html" class="nav-link cart-link">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count" id="cartCount">0</span>
+                </a>
+            </div>
+            <div class="nav-toggle" id="navToggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <section class="page-hero">
+        <div class="container">
+            <h1>Our Products</h1>
+        </div>
+    </section>
+
+    <section class="shop-section">
+        <div class="container">
+            <div class="products-grid">
+                <div class="product-card" data-id="1" data-name="Custom Stickers" data-price="30" data-image="https://images.unsplash.com/photo-1611329532992-c03afd1e7dfe?w=400">
+                    <img src="https://images.unsplash.com/photo-1611329532992-c03afd1e7dfe?w=400" alt="Custom Stickers">
+                    <div class="product-info">
+                        <h3>Custom Stickers</h3>
+                        <p>Size and finish customizable</p>
+                        <div class="product-footer">
+                            <span class="price">₱30</span>
+                            <button class="btn btn-primary add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-id="2" data-name="Button Pins" data-price="55" data-image="https://images.unsplash.com/photo-1606914469633-84f052e573c8?w=400">
+                    <img src="https://images.unsplash.com/photo-1606914469633-84f052e573c8?w=400" alt="Button Pins">
+                    <div class="product-info">
+                        <h3>Button Pins</h3>
+                        <p>Design and quantity options</p>
+                        <div class="product-footer">
+                            <span class="price">₱55</span>
+                            <button class="btn btn-primary add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-id="3" data-name="Custom Ballpens" data-price="70" data-image="https://images.unsplash.com/photo-1586864387634-700214c08b50?w=400">
+                    <img src="https://images.unsplash.com/photo-1586864387634-700214c08b50?w=400" alt="Custom Ballpens">
+                    <div class="product-info">
+                        <h3>Custom Ballpens</h3>
+                        <p>Ink color and customization</p>
+                        <div class="product-footer">
+                            <span class="price">₱70</span>
+                            <button class="btn btn-primary add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-id="4" data-name="Keychains" data-price="100" data-image="https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?w=400">
+                    <img src="https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?w=400" alt="Keychains">
+                    <div class="product-info">
+                        <h3>Keychains</h3>
+                        <p>Various materials available</p>
+                        <div class="product-footer">
+                            <span class="price">₱100</span>
+                            <button class="btn btn-primary add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-id="5" data-name="Name Tags / IDs" data-price="50" data-image="https://images.unsplash.com/photo-1589395937534-6f0c7d60f516?w=400">
+                    <img src="https://images.unsplash.com/photo-1589395937534-6f0c7d60f516?w=400" alt="Name Tags">
+                    <div class="product-info">
+                        <h3>Name Tags / IDs</h3>
+                        <p>Laminated with layouts</p>
+                        <div class="product-footer">
+                            <span class="price">₱50</span>
+                            <button class="btn btn-primary add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card" data-id="6" data-name="Sticker Pack" data-price="45" data-image="https://images.unsplash.com/photo-1611329532992-c03afd1e7dfe?w=400">
+                    <img src="https://images.unsplash.com/photo-1611329532992-c03afd1e7dfe?w=400" alt="Sticker Pack">
+                    <div class="product-info">
+                        <h3>Sticker Pack</h3>
+                        <p>Bundle of 10 stickers</p>
+                        <div class="product-footer">
+                            <span class="price">₱45</span>
+                            <button class="btn btn-primary add-to-cart">Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <div class="logo-icon">P</div>
+                        <span class="logo-text">PrintEase</span>
+                    </div>
+                    <p>Your trusted partner for affordable, high-quality digital printing services.</p>
+                </div>
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="shop.html">Shop</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Products</h3>
+                    <ul>
+                        <li>Custom Stickers</li>
+                        <li>Button Pins</li>
+                        <li>Custom Ballpens</li>
+                        <li>Keychains</li>
+                        <li>Name Tags / IDs</li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Contact Info</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> #21 Lt. Tiamsic St. Brgy. Tabacalera, Pateros</li>
+                        <li><i class="fas fa-envelope"></i> printease@example.com</li>
+                        <li><i class="fas fa-phone"></i> +63 912 345 6789</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 PrintEase Digital Printing. All rights reserved.</p>
+                <p>Presented by Mells Golden Team</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../JS_Files/main.js"></script>
+</body>
+</html>
