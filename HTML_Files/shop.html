@@ -9,110 +9,152 @@
 </head>
 <body>
     <nav class="navbar">
-        <div class="nav-container">
-            <div class="nav-logo" onclick="window.location.href='index.html'">
-                <div class="logo-icon">P</div>
-                <span class="logo-text">PrintEase</span>
-            </div>
-            <div class="nav-menu" id="navMenu">
-                <a href="index.html" class="nav-link">HOME</a>
-                <a href="about.html" class="nav-link">ABOUT US</a>
-                <a href="shop.html" class="nav-link active">SHOP</a>
-                <a href="contact.html" class="nav-link">CONTACT</a>
-                <a href="cart.html" class="nav-link cart-link">
-                    <i class="fas fa-shopping-cart"></i>
-                    <span class="cart-count" id="cartCount">0</span>
-                </a>
-            </div>
-            <div class="nav-toggle" id="navToggle">
-                <i class="fas fa-bars"></i>
-            </div>
+    <div class="nav-container">
+        <!-- Logo Section -->
+        <div class="nav-logo" onclick="window.location.href='index.html'">
+            <img src="../Pics/printeaseCROP-Photoroom.png" alt="PrintEase Logo">
+            <span class="logo-text">PrintEase</span>
         </div>
+        
+        <!-- Navigation Menu -->
+        <div class="nav-menu" id="navMenu">
+            <a href="index.html" class="nav-link">HOME</a>
+            <a href="about.html" class="nav-link">ABOUT US</a>
+            <a href="shop.html" class="nav-link active">SHOP</a>
+            <a href="contact.html" class="nav-link">CONTACT</a>
+            <a href="cart.html" class="nav-link cart-link">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="cart-count" id="cartCount">0</span>
+            </a>
+        </div>
+        
+        <!-- Mobile Toggle Button -->
+        <div class="nav-toggle" id="navToggle">
+            <i class="fas fa-bars"></i>
+        </div>
+    </div>
+</nav>
     </nav>
 
     <section class="page-hero">
-        <div class="container">
-            <h1>Our Products</h1>
+    <div class="container">
+        <h1>Our Products</h1>
+        <div class="hero-text-and-button">
+            <p>Affordable, High-Quality, Ready in a Flash.</p>
+            <div class="design-btn-container">
+                <button id="openDesignModalBtn" class="btn btn-secondary hero-btn"><i class="fas fa-upload"></i> Send Your Design</button>
+            </div>
         </div>
-    </section>
+    </div>
+</section>
 
-    <section class="shop-section">
-        <div class="container">
-            <div class="products-grid">
-                <div class="product-card" data-id="1" data-name="Custom Stickers" data-price="30" data-image="https://images.unsplash.com/photo-1611329532992-c03afd1e7dfe?w=400">
-                    <img src="https://images.unsplash.com/photo-1611329532992-c03afd1e7dfe?w=400" alt="Custom Stickers">
-                    <div class="product-info">
-                        <h3>Custom Stickers</h3>
-                        <p>Size and finish customizable</p>
-                        <div class="product-footer">
-                            <span class="price">₱30</span>
-                            <button class="btn btn-primary add-to-cart">Add to Cart</button>
-                        </div>
+  <section class="shop-section">
+    <div class="container">
+        <div class="products-grid">
+            <!-- Product 1: Custom Stickers -->
+            <div class="product-card" 
+                 data-id="1" 
+                 data-name="Custom Stickers" 
+                 data-price="30" 
+                 data-image="../Pics/sticker2.jpg">
+                <img src="../Pics/sticker2.jpg" alt="Custom Stickers">
+                <div class="product-info">
+                    <h3>Custom Stickers</h3>
+                    <p>Die-cut, waterproof, glossy or matte finish.</p>
+                    <div class="product-footer">
+                        <span class="price">₱30</span>
+                        <button class="btn btn-primary add-to-cart">Add to Cart</button>
                     </div>
                 </div>
+            </div>
 
-                <div class="product-card" data-id="2" data-name="Button Pins" data-price="55" data-image="https://images.unsplash.com/photo-1606914469633-84f052e573c8?w=400">
-                    <img src="https://images.unsplash.com/photo-1606914469633-84f052e573c8?w=400" alt="Button Pins">
-                    <div class="product-info">
-                        <h3>Button Pins</h3>
-                        <p>Design and quantity options</p>
-                        <div class="product-footer">
-                            <span class="price">₱55</span>
-                            <button class="btn btn-primary add-to-cart">Add to Cart</button>
-                        </div>
+            <!-- Product 2: Button Pins -->
+            <div class="product-card" 
+                 data-id="2" 
+                 data-name="Button Pins" 
+                 data-price="55" 
+                 data-image="../Pics/pins.jpg">
+                <img src="../Pics/pins.jpg" alt="Button Pins">
+                <div class="product-info">
+                    <h3>Button Pins</h3>
+                    <p>Durable button pins, great for events and branding.</p>
+                    <div class="product-footer">
+                        <span class="price">₱55</span>
+                        <button class="btn btn-primary add-to-cart">Add to Cart</button>
                     </div>
                 </div>
+            </div>
 
-                <div class="product-card" data-id="3" data-name="Custom Ballpens" data-price="70" data-image="https://images.unsplash.com/photo-1586864387634-700214c08b50?w=400">
-                    <img src="https://images.unsplash.com/photo-1586864387634-700214c08b50?w=400" alt="Custom Ballpens">
-                    <div class="product-info">
-                        <h3>Custom Ballpens</h3>
-                        <p>Ink color and customization</p>
-                        <div class="product-footer">
-                            <span class="price">₱70</span>
-                            <button class="btn btn-primary add-to-cart">Add to Cart</button>
-                        </div>
+            <!-- Product 3: Custom Ballpens -->
+            <div class="product-card" 
+                 data-id="3" 
+                 data-name="Custom Ballpens" 
+                 data-price="70" 
+                 data-image="../Pics/ballpen.jpg">
+                <img src="../Pics/ballpen.jpg" alt="Custom Ballpens">
+                <div class="product-info">
+                    <h3>Custom Ballpens</h3>
+                    <p>Printed or engraved text, perfect for giveaways.</p>
+                    <div class="product-footer">
+                        <span class="price">₱70</span>
+                        <button class="btn btn-primary add-to-cart">Add to Cart</button>
                     </div>
                 </div>
+            </div>
 
-                <div class="product-card" data-id="4" data-name="Keychains" data-price="100" data-image="https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?w=400">
-                    <img src="https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?w=400" alt="Keychains">
-                    <div class="product-info">
-                        <h3>Keychains</h3>
-                        <p>Various materials available</p>
-                        <div class="product-footer">
-                            <span class="price">₱100</span>
-                            <button class="btn btn-primary add-to-cart">Add to Cart</button>
-                        </div>
+            <!-- Product 4: Keychains -->
+            <div class="product-card" 
+                 data-id="4" 
+                 data-name="Keychains" 
+                 data-price="100" 
+                 data-image="../Pics/keychain.jpg">
+                <img src="../Pics/keychain.jpg" alt="Keychains">
+                <div class="product-info">
+                    <h3>Keychains</h3>
+                    <p>Photo insert keychains in acrylic or PVC material.</p>
+                    <div class="product-footer">
+                        <span class="price">₱100</span>
+                        <button class="btn btn-primary add-to-cart">Add to Cart</button>
                     </div>
                 </div>
+            </div>
 
-                <div class="product-card" data-id="5" data-name="Name Tags / IDs" data-price="50" data-image="https://images.unsplash.com/photo-1589395937534-6f0c7d60f516?w=400">
-                    <img src="https://images.unsplash.com/photo-1589395937534-6f0c7d60f516?w=400" alt="Name Tags">
-                    <div class="product-info">
-                        <h3>Name Tags / IDs</h3>
-                        <p>Laminated with layouts</p>
-                        <div class="product-footer">
-                            <span class="price">₱50</span>
-                            <button class="btn btn-primary add-to-cart">Add to Cart</button>
-                        </div>
+            <!-- Product 5: Name Tags / IDs -->
+            <div class="product-card" 
+                 data-id="5" 
+                 data-name="Name Tags / IDs" 
+                 data-price="50" 
+                 data-image="../Pics/nametag2.jpg">
+                <img src="../Pics/nametag2.jpg" alt="Name Tags">
+                <div class="product-info">
+                    <h3>Name Tags / IDs</h3>
+                    <p>Laminated IDs, vertical or horizontal layouts.</p>
+                    <div class="product-footer">
+                        <span class="price">₱50</span>
+                        <button class="btn btn-primary add-to-cart">Add to Cart</button>
                     </div>
                 </div>
+            </div>
 
-                <div class="product-card" data-id="6" data-name="Sticker Pack" data-price="45" data-image="https://images.unsplash.com/photo-1611329532992-c03afd1e7dfe?w=400">
-                    <img src="https://images.unsplash.com/photo-1611329532992-c03afd1e7dfe?w=400" alt="Sticker Pack">
-                    <div class="product-info">
-                        <h3>Sticker Pack</h3>
-                        <p>Bundle of 10 stickers</p>
-                        <div class="product-footer">
-                            <span class="price">₱45</span>
-                            <button class="btn btn-primary add-to-cart">Add to Cart</button>
-                        </div>
+            <!-- Product 6: Sticker Pack -->
+            <div class="product-card" 
+                 data-id="6" 
+                 data-name="Sticker Pack" 
+                 data-price="45" 
+                 data-image="../Pics/sticker.jpg">
+                <img src="../Pics/sticker.jpg" alt="Sticker Pack">
+                <div class="product-info">
+                    <h3>Sticker Pack</h3>
+                    <p>Bundle of 10 assorted popular designs.</p>
+                    <div class="product-footer">
+                        <span class="price">₱45</span>
+                        <button class="btn btn-primary add-to-cart">Add to Cart</button>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
     <footer class="footer">
         <div class="container">
@@ -146,7 +188,7 @@
                 <div class="footer-col">
                     <h3>Contact Info</h3>
                     <ul>
-                        <li><i class="fas fa-map-marker-alt"></i> #21 Lt. Tiamsic St. Brgy. Tabacalera, Pateros</li>
+                        <li><i class="fas fa-map-marker-alt"></i> #21 Lt. Tiamsic St. Brgy. Tabacalera, Pateros (Placeholder Address)</li>
                         <li><i class="fas fa-envelope"></i> printease@example.com</li>
                         <li><i class="fas fa-phone"></i> +63 912 345 6789</li>
                     </ul>
@@ -158,6 +200,48 @@
             </div>
         </div>
     </footer>
+
+    <div id="designModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>Submit Your Custom Design</h2>
+            <p>Have a unique design in mind? Send it to us! We'll review it and get back to you with a quote.</p>
+            <form id="designForm">
+                <div class="form-group">
+                    <label for="designItemType">Item Type:</label>
+                    <select id="designItemType" name="itemType" required>
+                        <option value="">-- Select an Item Type --</option>
+                        <option value="Custom Stickers">Custom Stickers</option>
+                        <option value="Button Pins">Button Pins</option>
+                        <option value="Custom Ballpens">Custom Ballpens</option>
+                        <option value="Keychains">Keychains</option>
+                        <option value="Name Tags / IDs">Name Tags / IDs</option>
+                        <option value="Other">Other (Describe in Notes)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="designQuantity">Quantity (approximate):</label>
+                    <input type="number" id="designQuantity" name="quantity" min="1" value="1" required>
+                </div>
+                <div class="form-group">
+                    <label for="designFile">Upload Your Design (Image File):</label>
+                    <input type="file" id="designFile" name="design" accept="image/*" required>
+                    <small>Accepted formats: JPG, PNG, GIF. Max file size: 5MB (mockup validation)</small>
+                    <div id="filePreview" class="file-preview"></div>
+                </div>
+                <div class="form-group">
+                    <label for="designNotes">Additional Notes:</label>
+                    <textarea id="designNotes" name="notes" rows="3" placeholder="e.g., specific size, colors, or details for 'Other' item type"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="designEmail">Your Email:</label>
+                    <input type="email" id="designEmail" name="email" required placeholder="name@example.com">
+                </div>
+                <button type="submit" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Submit Design Request</button>
+                <p id="designFormMessage" class="form-message" style="display:none;"></p>
+            </form>
+        </div>
+    </div>
 
     <script src="../JS_Files/main.js"></script>
 </body>
