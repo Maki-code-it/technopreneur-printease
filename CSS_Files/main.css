@@ -1,3 +1,8 @@
+/* ============================================
+   FILE: CSS_Files/main.css
+   PrintEase Digital Printing - Complete Fixed CSS
+============================================ */
+
 * {
     margin: 0;
     padding: 0;
@@ -410,6 +415,21 @@ img {
     font-weight: 700;
 }
 
+.page-hero .hero-text-and-button p {
+    margin: 20px 0;
+    font-size: 1.1em;
+    opacity: 0.9;
+}
+
+.design-btn-container {
+    margin-top: 15px;
+}
+
+.page-hero .hero-btn {
+    padding: 12px 25px;
+    font-size: 1.1em;
+}
+
 /* Vision & Mission Section */
 .vision-mission-section {
     padding: 60px 0;
@@ -471,56 +491,69 @@ img {
     margin-bottom: 15px;
 }
 
-/* Products Showcase Section */
-.products-showcase-section {
+/* Why Choose Us Section */
+.why-choose-section {
     padding: 60px 0;
-    background: var(--light-gray);
+    background: var(--white);
 }
 
-.products-grid {
+/* Stats Section */
+.stats-section {
+    padding: 60px 0;
+    background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-blue) 100%);
+    color: var(--white);
+}
+
+.stats-section .section-title {
+    color: var(--white);
+}
+
+.stats-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 30px;
     margin-top: 30px;
 }
 
-.product-showcase-card {
-    background: var(--white);
+.stat-card {
+    text-align: center;
+    padding: 30px 20px;
+    background: rgba(255, 255, 255, 0.1);
     border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
 }
 
-.product-showcase-card:hover {
+.stat-card:hover {
+    background: rgba(255, 255, 255, 0.15);
     transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
-.product-showcase-card img {
-    width: 100%;
-    height: 220px;
-    object-fit: cover;
+.stat-icon {
+    width: 70px;
+    height: 70px;
+    background-color: var(--primary-gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 15px;
 }
 
-.product-showcase-card h3 {
-    font-size: 22px;
+.stat-icon i {
+    font-size: 32px;
     color: var(--primary-blue);
-    padding: 20px 20px 10px;
 }
 
-.product-showcase-card p {
-    color: var(--gray);
-    padding: 0 20px;
-    margin-bottom: 15px;
-}
-
-.product-showcase-card .price {
-    display: block;
-    font-size: 28px;
+.stat-card h3 {
+    font-size: 36px;
     font-weight: bold;
     color: var(--primary-gold);
-    padding: 0 20px 20px;
+    margin-bottom: 10px;
+}
+
+.stat-card p {
+    font-size: 16px;
+    color: rgba(255, 255, 255, 0.9);
 }
 
 /* Team Section */
@@ -675,7 +708,8 @@ img {
 }
 
 .form-group input,
-.form-group textarea {
+.form-group textarea,
+.form-group select {
     width: 100%;
     padding: 12px;
     border: 2px solid #e5e7eb;
@@ -685,7 +719,8 @@ img {
 }
 
 .form-group input:focus,
-.form-group textarea:focus {
+.form-group textarea:focus,
+.form-group select:focus {
     outline: none;
     border-color: var(--primary-gold);
 }
@@ -709,9 +744,17 @@ img {
     display: block;
 }
 
-/* Shop Section */
+/* Shop Section - FIXED */
 .shop-section {
     padding: 60px 0;
+    background: var(--light-gray);
+}
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-top: 30px;
 }
 
 .product-card {
@@ -720,6 +763,8 @@ img {
     overflow: hidden;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
 }
 
 .product-card:hover {
@@ -735,6 +780,9 @@ img {
 
 .product-info {
     padding: 25px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
 }
 
 .product-info h3 {
@@ -746,12 +794,14 @@ img {
 .product-info p {
     color: var(--gray);
     margin-bottom: 20px;
+    flex: 1;
 }
 
 .product-footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-top: auto;
 }
 
 .product-footer .price {
@@ -760,20 +810,30 @@ img {
     color: var(--primary-gold);
 }
 
-/* Cart Section */
+/* Cart Section - FIXED */
 .cart-section {
     padding: 60px 0;
     min-height: 60vh;
+    background: var(--light-gray);
 }
 
 .empty-cart {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     text-align: center;
     padding: 80px 20px;
+    background: var(--white);
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: 0 auto;
 }
 
 .empty-cart i {
     font-size: 80px;
-    color: var(--gray);
+    color: #6b7280;
     margin-bottom: 20px;
 }
 
@@ -803,10 +863,12 @@ img {
 
 .cart-item {
     background: var(--white);
-    padding: 20px;
+    padding: 25px;
     border-radius: 12px;
-    display: flex;
+    display: grid;
+    grid-template-columns: 120px 1fr auto 50px;
     gap: 20px;
+    align-items: center;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
 }
 
@@ -818,26 +880,28 @@ img {
 }
 
 .cart-item-details {
-    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .cart-item-details h3 {
     font-size: 20px;
     color: var(--primary-blue);
-    margin-bottom: 5px;
+    margin: 0;
 }
 
 .cart-item-details .price {
     font-size: 18px;
     color: var(--primary-gold);
     font-weight: bold;
-    margin-bottom: 15px;
+    display: block;
 }
 
 .quantity-controls {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 10px;
 }
 
 .quantity-btn {
@@ -859,6 +923,7 @@ img {
 
 .quantity-btn i {
     font-size: 14px;
+    color: var(--primary-blue);
 }
 
 .quantity-display {
@@ -874,8 +939,8 @@ img {
     color: #ef4444;
     cursor: pointer;
     font-size: 20px;
-    margin-left: auto;
     transition: color 0.3s ease;
+    padding: 5px;
 }
 
 .remove-btn:hover {
@@ -936,7 +1001,7 @@ img {
     color: var(--primary-gold);
 }
 
-/* Modal */
+/* Modal Styles */
 .modal {
     display: none;
     position: fixed;
@@ -965,20 +1030,31 @@ img {
     position: relative;
     max-height: 90vh;
     overflow-y: auto;
+    animation: fadeIn 0.3s ease-out;
 }
 
-.modal-close {
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.modal-close, .close-button {
+    color: var(--dark-gray);
+    font-size: 28px;
+    font-weight: 700;
     position: absolute;
-    right: 20px;
-    top: 20px;
-    font-size: 32px;
-    font-weight: bold;
-    color: var(--gray);
+    top: 10px;
+    right: 15px;
+    line-height: 1;
     cursor: pointer;
-    transition: color 0.3s ease;
+    transition: color 0.2s ease;
+    background: none;
+    border: none;
+    padding: 5px;
 }
 
-.modal-close:hover {
+.modal-close:hover,
+.close-button:hover {
     color: var(--primary-blue);
 }
 
@@ -992,6 +1068,11 @@ img {
     font-size: 20px;
     color: var(--primary-blue);
     margin: 25px 0 15px;
+}
+
+.modal-content p {
+    color: var(--dark-gray);
+    margin-bottom: 20px;
 }
 
 .payment-options {
@@ -1051,7 +1132,33 @@ img {
     font-size: 18px;
 }
 
+.file-preview {
+    margin-top: 10px;
+    padding: 15px;
+    border: 2px dashed var(--light-gray);
+    border-radius: 8px;
+    text-align: center;
+}
+
 /* Responsive Design */
+@media (max-width: 1024px) {
+    .products-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .cart-content {
+        grid-template-columns: 1fr;
+    }
+    
+    .cart-summary {
+        position: static;
+    }
+    
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
 @media (max-width: 768px) {
     .nav-menu {
         display: none;
@@ -1101,17 +1208,28 @@ img {
         grid-template-columns: 1fr;
     }
 
-    .cart-content {
+    .products-grid {
         grid-template-columns: 1fr;
     }
 
     .cart-item {
-        flex-direction: column;
+        grid-template-columns: 100px 1fr;
+        gap: 15px;
+        position: relative;
     }
-
-    .cart-item img {
-        width: 100%;
-        height: 200px;
+    
+    .cart-item-total {
+        grid-column: 1 / -1;
+        text-align: left;
+        margin-top: 10px;
+        padding-top: 10px;
+        border-top: 1px solid var(--light-gray);
+    }
+    
+    .remove-btn {
+        position: absolute;
+        top: 10px;
+        right: 10px;
     }
 }
 
@@ -1136,4 +1254,101 @@ img {
         padding: 10px 20px;
         font-size: 14px;
     }
+    
+    .product-card img {
+        height: 200px;
+    }
+    
+    .product-info {
+        padding: 20px;
+    }
+    
+    .product-info h3 {
+        font-size: 18px;
+    }
+    
+    .product-footer .price {
+        font-size: 24px;
+    }
+    
+    .cart-item {
+        padding: 15px;
+    }
+    
+    .cart-item img {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .cart-item-details h3 {
+        font-size: 16px;
+    }
+    
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .stat-card h3 {
+        font-size: 28px;
+    }
+}
+.logo-icon {
+    width: 50px;
+    height: 50px;
+    background-color: transparent; /* Remove background if using image */
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    font-weight: bold;
+    color: var(--primary-blue);
+    overflow: hidden; /* Prevent image overflow */
+}
+
+/* If you're using an <img> tag inside .logo-icon */
+.logo-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Keeps aspect ratio */
+    display: block;
+}
+
+/* Alternative: If you replaced entire .nav-logo with image */
+.nav-logo img {
+    max-height: 60px; /* Adjust this to control logo size */
+    width: auto;
+    object-fit: contain;
+    cursor: pointer;
+}
+
+/* Hide the "P" text if you're using an image */
+.logo-icon:not(:has(img)) {
+    /* Only show background color if there's no image */
+    background-color: var(--primary-gold);
+}
+
+/* Footer Logo Image Fix */
+.footer-logo .logo-icon {
+    width: 40px;
+    height: 40px;
+}
+
+.footer-logo .logo-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+.cart-item-image {
+    width: 120px;
+    height: 120px;
+    flex-shrink: 0;
+}
+
+.cart-item-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+    display: block;
 }
