@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart - PrintEase Digital Printing</title>
+    <link rel="stylesheet" href="../CSS_Files/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+          <div class="nav-container">
+        <!-- Logo Section -->
+        <div class="nav-logo" onclick="window.location.href='index.html'">
+            <img src="../Pics/printeaseCROP-Photoroom.png" alt="PrintEase Logo">
+            <span class="logo-text">PrintEase</span>
+        </div>
+            <div class="nav-menu" id="navMenu">
+                <a href="index.html" class="nav-link">HOME</a>
+                <a href="about.html" class="nav-link">ABOUT US</a>
+                <a href="shop.html" class="nav-link">SHOP</a>
+                <a href="contact.html" class="nav-link">CONTACT</a>
+                <a href="cart.html" class="nav-link cart-link active">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count" id="cartCount">0</span>
+                </a>
+            </div>
+            <div class="nav-toggle" id="navToggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <section class="page-hero">
+        <div class="container">
+            <h1>Shopping Cart</h1>
+        </div>
+    </section>
+
+    <section class="cart-section">
+        <div class="container">
+            <div id="emptyCart" class="empty-cart">
+                <i class="fas fa-shopping-cart"></i>
+                <h2>Your cart is empty</h2>
+                <p>Add some products to get started!</p>
+                <a href="shop.html" class="btn btn-primary">Start Shopping</a>
+            </div>
+
+            <div id="cartContent" class="cart-content" style="display: none;">
+                <div class="cart-items" id="cartItems"></div>
+                
+                <div class="cart-summary">
+                    <h2>Order Summary</h2>
+                    <div class="summary-row">
+                        <span>Subtotal:</span>
+                        <span id="subtotal">₱0</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Delivery Fee:</span>
+                        <span>₱50</span>
+                    </div>
+                    <div class="summary-row total">
+                        <span>Total:</span>
+                        <span id="total">₱50</span>
+                    </div>
+                    <button class="btn btn-primary btn-full" id="checkoutBtn">Proceed to Checkout</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="checkoutModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" id="closeModal">&times;</span>
+            <h2>Checkout</h2>
+            <form id="checkoutForm">
+                <h3>Customer Information</h3>
+                <div class="form-group">
+                    <label for="fullName">Full Name</label>
+                    <input type="text" id="fullName" required>
+                </div>
+                <div class="form-group">
+                    <label for="emailCheckout">Email</label>
+                    <input type="email" id="emailCheckout" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="address">Delivery Address</label>
+                    <textarea id="address" rows="3" required></textarea>
+                </div>
+
+                <h3>Payment Method</h3>
+                <div class="payment-options">
+                    <label class="payment-option">
+                        <input type="radio" name="payment" value="cod" required>
+                        <span>Cash on Delivery</span>
+                    </label>
+                    <label class="payment-option">
+                        <input type="radio" name="payment" value="gcash">
+                        <span>GCash</span>
+                    </label>
+                    <label class="payment-option">
+                        <input type="radio" name="payment" value="bank">
+                        <span>Bank Transfer</span>
+                    </label>
+                </div>
+
+                <div class="checkout-summary">
+                    <div class="summary-row">
+                        <span>Subtotal:</span>
+                        <span id="checkoutSubtotal">₱0</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Delivery Fee:</span>
+                        <span>₱50</span>
+                    </div>
+                    <div class="summary-row total">
+                        <span>Total:</span>
+                        <span id="checkoutTotal">₱50</span>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-full">Place Order</button>
+            </form>
+
+            <div id="orderSuccess" class="order-success" style="display: none;">
+                <i class="fas fa-check-circle"></i>
+                <h2>Order Complete!</h2>
+                <p>Thank you for your order. We will process it shortly.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <div class="logo-icon">P</div>
+                        <span class="logo-text">PrintEase</span>
+                    </div>
+                    <p>Your trusted partner for affordable, high-quality digital printing services.</p>
+                </div>
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="shop.html">Shop</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Products</h3>
+                    <ul>
+                        <li>Custom Stickers</li>
+                        <li>Button Pins</li>
+                        <li>Custom Ballpens</li>
+                        <li>Keychains</li>
+                        <li>Name Tags / IDs</li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Contact Info</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> #21 Lt. Tiamsic St. Brgy. Tabacalera, Pateros</li>
+                        <li><i class="fas fa-envelope"></i> printease@example.com</li>
+                        <li><i class="fas fa-phone"></i> +63 912 345 6789</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 PrintEase Digital Printing. All rights reserved.</p>
+                <p>Presented by Mells Golden Team</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../JS_Files/main.js"></script>
+</body>
+</html>
