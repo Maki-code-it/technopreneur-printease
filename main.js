@@ -490,3 +490,105 @@ style.textContent = `
     }
 `;
 document.head.appendChild(style);
+/* ============================================
+   FLOATING STICKERS JAVASCRIPT
+   Add this code to the end of main.js
+============================================ */
+
+// Floating Stickers - Only on Homepage
+function initFloatingStickers() {
+    // Only run on index.html
+    if (!window.location.pathname.includes('index.html') && window.location.pathname !== '/') {
+        return;
+    }
+
+    const floatingContainer = document.getElementById('floatingStickers');
+    if (!floatingContainer) return;
+
+    const stickers = floatingContainer.querySelectorAll('.floating-sticker');
+    
+    // Store initial positions
+    const stickerData = [];
+    stickers.forEach((sticker, index) => {
+        const rect = sticker.getBoundingClientRect();
+        stickerData.push({
+            element: sticker,
+            initialTop: rect.top + window.scrollY,
+            speed: 0.3 + (index * 0.05) // Different speeds for each sticker
+        });
+    });
+
+    // Scroll effect
+    let ticking = false;
+    
+    window.addEventListener('scroll', function() {
+        if (!ticking) {
+            window.requestAnimationFrame(function() {
+                updateStickerPositions();
+                ticking = false;
+            });
+            ticking = true;
+        }
+    });
+
+    function updateStickerPositions() {
+        const scrollY = window.scrollY;
+        
+        stickerData.forEach(data => {
+            // Calculate parallax effect
+            const offset = scrollY * data.speed;
+            data.element.style.transform = `translateY(${offset}px)`;
+        });
+    }
+
+    // Mouse move effect for extra interactivity (optional)
+    let mouseX = 0;
+    let mouseY = 0;
+    let currentX = 0;
+    let currentY = 0;
+
+    document.addEventListener('mousemove', function(e) {
+        mouseX = e.clientX / window.innerWidth - 0.5;
+        mouseY = e.clientY / window.innerHeight - 0.5;
+    });
+
+    // Smooth animation loop for mouse effect
+    function animateStickers() {
+        // Smoothly interpolate current position towards target
+        currentX += (mouseX - currentX) * 0.05;
+        currentY += (mouseY - currentY) * 0.05;
+
+        stickerData.forEach((data, index) => {
+            const scrollY = window.scrollY;
+            const scrollOffset = scrollY * data.speed;
+            
+            // Add subtle mouse parallax (smaller effect)
+            const mouseOffsetX = currentX * (10 + index * 5);
+            const mouseOffsetY = currentY * (10 + index * 5);
+            
+            data.element.style.transform = `
+                translateY(${scrollOffset}px) 
+                translateX(${mouseOffsetX}px)
+            `;
+        });
+
+        requestAnimationFrame(animateStickers);
+    }
+
+    animateStickers();
+}
+
+// Update the DOMContentLoaded event listener
+document.addEventListener('DOMContentLoaded', function() {
+    updateCartCount();
+    initMobileMenu();
+    initAddToCart();
+    initDesignModal();
+    initFloatingStickers(); // Add this line
+    
+    // Initialize cart page if on cart.html
+    if (window.location.pathname.includes('cart.html')) {
+        displayCart();
+        initCheckout();
+    }
+});
