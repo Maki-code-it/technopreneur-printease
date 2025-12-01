@@ -8,33 +8,101 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-     <div class="floating-stickers" id="floatingStickers"></div>
- <nav class="navbar">
-    <div class="nav-container">
-        <!-- Logo Section -->
-        <div class="nav-logo" onclick="window.location.href='index.html'">
-            <img src="printeaseCROP-Photoroom.png" alt="PrintEase Logo">
-            <span class="logo-text">PrintEase</span>
+    <!-- Floating Stickers - Homepage Only -->
+    <div class="floating-stickers" id="floatingStickers">
+        <div class="floating-sticker sticker-1">
+            <img src="float.png" alt="Floating Sticker 1">
         </div>
-        
-        <!-- Navigation Menu -->
-        <div class="nav-menu" id="navMenu">
-            <a href="index.html" class="nav-link active">HOME</a>
-            <a href="about.html" class="nav-link">ABOUT US</a>
-            <a href="shop.html" class="nav-link">SHOP</a>
-            <a href="contact.html" class="nav-link">CONTACT</a>
-            <a href="cart.html" class="nav-link cart-link">
-                <i class="fas fa-shopping-cart"></i>
-                <span class="cart-count" id="cartCount">0</span>
-            </a>
+        <div class="floating-sticker sticker-2">
+            <img src="float2.png" alt="Floating Sticker 2">
         </div>
-        
-        <!-- Mobile Toggle Button -->
-        <div class="nav-toggle" id="navToggle">
-            <i class="fas fa-bars"></i>
+        <div class="floating-sticker sticker-3">
+            <img src="float3.png" alt="Floating Pin">
+        </div>
+        <div class="floating-sticker sticker-4">
+            <img src="float4.png" alt="Floating Ballpen">
+        </div>
+        <div class="floating-sticker sticker-5">
+            <img src="float5.png" alt="Floating Nametag">
+        </div>
+        <div class="floating-sticker sticker-6">
+            <img src="float6.png" alt="Floating Keychain">
         </div>
     </div>
-</nav>
+
+    <!-- AI Chatbot Button -->
+    <div class="chatbot-container">
+        <button class="chatbot-button" id="chatbotButton">
+            <i class="fas fa-comments"></i>
+            <span class="chatbot-badge">1</span>
+        </button>
+        
+        <!-- Chatbot Window -->
+        <div class="chatbot-window" id="chatbotWindow">
+            <div class="chatbot-header">
+                <div class="chatbot-header-info">
+                    <div class="chatbot-avatar">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div>
+                        <h4>PrintEase Assistant</h4>
+                        <span class="chatbot-status">
+                            <span class="status-dot"></span> Online
+                        </span>
+                    </div>
+                </div>
+                <button class="chatbot-close" id="chatbotClose">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div class="chatbot-messages" id="chatbotMessages">
+                <div class="bot-message">
+                    <div class="message-avatar">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="message-content">
+                        <p>Hi! 👋 Welcome to PrintEase! How can I help you today?</p>
+                        <span class="message-time">Just now</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="chatbot-input-area">
+                <input type="text" id="chatbotInput" placeholder="Type your message..." autocomplete="off">
+                <button id="chatbotSend">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <!-- Logo Section -->
+            <div class="nav-logo" onclick="window.location.href='index.html'">
+                <img src="printeaseCROP-Photoroom.png" alt="PrintEase Logo">
+                <span class="logo-text">PrintEase</span>
+            </div>
+            
+            <!-- Navigation Menu -->
+            <div class="nav-menu" id="navMenu">
+                <a href="index.html" class="nav-link active">HOME</a>
+                <a href="about.html" class="nav-link">ABOUT US</a>
+                <a href="shop.html" class="nav-link">SHOP</a>
+                <a href="contact.html" class="nav-link">CONTACT</a>
+                <a href="cart.html" class="nav-link cart-link">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count" id="cartCount">0</span>
+                </a>
+            </div>
+            
+            <!-- Mobile Toggle Button -->
+            <div class="nav-toggle" id="navToggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
 
     <section class="hero-slider">
         <div class="slider-container">

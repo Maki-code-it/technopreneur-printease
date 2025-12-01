@@ -1,7 +1,7 @@
 /* ===========================================
    FILE: JS_Files/main.js
    PrintEase Digital Printing - Main JavaScript
-   FIXED: Cart images now display properly
+   WITH CHATBOT & FLOATING STICKERS
 ============================================ */
 
 // Cart System - Using localStorage to persist cart data
@@ -13,6 +13,8 @@ document.addEventListener('DOMContentLoaded', function() {
     initMobileMenu();
     initAddToCart();
     initDesignModal();
+    initChatbot(); // Initialize chatbot on all pages
+    initFloatingStickers(); // Initialize floating stickers
     
     // Initialize cart page if on cart.html
     if (window.location.pathname.includes('cart.html')) {
@@ -20,6 +22,279 @@ document.addEventListener('DOMContentLoaded', function() {
         initCheckout();
     }
 });
+
+// ============================================
+// FLOATING STICKERS - HOMEPAGE ONLY
+// ============================================
+function initFloatingStickers() {
+    const floatingContainer = document.getElementById('floatingStickers');
+    
+    // Only run on index.html or root path
+    const isHomepage = window.location.pathname.includes('index.html') || 
+                       window.location.pathname === '/' ||
+                       window.location.pathname === '/index.html';
+    
+    if (!floatingContainer || !isHomepage) {
+        if (floatingContainer) {
+            floatingContainer.style.display = 'none';
+        }
+        return;
+    }
+
+    floatingContainer.style.display = 'block';
+    const stickers = floatingContainer.querySelectorAll('.floating-sticker');
+    
+    // Store initial positions
+    const stickerData = [];
+    stickers.forEach((sticker, index) => {
+        const rect = sticker.getBoundingClientRect();
+        stickerData.push({
+            element: sticker,
+            initialTop: rect.top + window.scrollY,
+            speed: 0.15 + (index * 0.03) // Slower speeds for smoother effect
+        });
+    });
+
+    // Scroll effect
+    let ticking = false;
+    
+    window.addEventListener('scroll', function() {
+        if (!ticking) {
+            window.requestAnimationFrame(function() {
+                updateStickerPositions();
+                ticking = false;
+            });
+            ticking = true;
+        }
+    });
+
+    function updateStickerPositions() {
+        const scrollY = window.scrollY;
+        
+        stickerData.forEach(data => {
+            // Calculate parallax effect - moves with scroll
+            const offset = scrollY * data.speed;
+            data.element.style.transform = `translateY(${offset}px)`;
+        });
+    }
+
+    // Mouse move effect for extra interactivity
+    let mouseX = 0;
+    let mouseY = 0;
+
+    document.addEventListener('mousemove', function(e) {
+        mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+        mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+        
+        stickerData.forEach((data, index) => {
+            const scrollY = window.scrollY;
+            const scrollOffset = scrollY * data.speed;
+            
+            // Add subtle mouse parallax
+            const mouseOffsetX = mouseX * (8 + index * 3);
+            const mouseOffsetY = mouseY * (8 + index * 3);
+            
+            data.element.style.transform = `
+                translateY(${scrollOffset}px) 
+                translateX(${mouseOffsetX}px)
+            `;
+        });
+    });
+}
+
+// ============================================
+// AI CHATBOT SYSTEM
+// ============================================
+function initChatbot() {
+    const chatbotButton = document.getElementById('chatbotButton');
+    const chatbotWindow = document.getElementById('chatbotWindow');
+    const chatbotClose = document.getElementById('chatbotClose');
+    const chatbotInput = document.getElementById('chatbotInput');
+    const chatbotSend = document.getElementById('chatbotSend');
+    const chatbotMessages = document.getElementById('chatbotMessages');
+
+    if (!chatbotButton || !chatbotWindow) return;
+
+    // Toggle chatbot window
+    chatbotButton.addEventListener('click', function() {
+        chatbotWindow.classList.toggle('active');
+        if (chatbotWindow.classList.contains('active')) {
+            chatbotInput.focus();
+            // Remove badge when opened
+            const badge = document.querySelector('.chatbot-badge');
+            if (badge) badge.style.display = 'none';
+        }
+    });
+
+    // Close chatbot
+    chatbotClose.addEventListener('click', function() {
+        chatbotWindow.classList.remove('active');
+    });
+
+    // Send message function
+    function sendMessage() {
+        const message = chatbotInput.value.trim();
+        if (!message) return;
+
+        // Add user message
+        addMessage(message, 'user');
+        chatbotInput.value = '';
+
+        // Show typing indicator
+        showTypingIndicator();
+
+        // Simulate bot response after delay
+        setTimeout(() => {
+            removeTypingIndicator();
+            const response = getBotResponse(message);
+            addMessage(response, 'bot');
+        }, 1500 + Math.random() * 1000);
+    }
+
+    // Send button click
+    chatbotSend.addEventListener('click', sendMessage);
+
+    // Enter key to send
+    chatbotInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            sendMessage();
+        }
+    });
+
+    // Add message to chat
+    function addMessage(text, sender) {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = sender === 'user' ? 'user-message' : 'bot-message';
+        
+        const time = new Date().toLocaleTimeString('en-US', { 
+            hour: '2-digit', 
+            minute: '2-digit' 
+        });
+
+        if (sender === 'user') {
+            messageDiv.innerHTML = `
+                <div class="message-content">
+                    <p>${text}</p>
+                    <span class="message-time">${time}</span>
+                </div>
+                <div class="message-avatar">
+                    <i class="fas fa-user"></i>
+                </div>
+            `;
+        } else {
+            messageDiv.innerHTML = `
+                <div class="message-avatar">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <div class="message-content">
+                    <p>${text}</p>
+                    <span class="message-time">${time}</span>
+                </div>
+            `;
+        }
+
+        chatbotMessages.appendChild(messageDiv);
+        chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+    }
+
+    // Typing indicator
+    function showTypingIndicator() {
+        const typingDiv = document.createElement('div');
+        typingDiv.className = 'bot-message typing-message';
+        typingDiv.innerHTML = `
+            <div class="message-avatar">
+                <i class="fas fa-robot"></i>
+            </div>
+            <div class="message-content">
+                <div class="typing-indicator">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        `;
+        chatbotMessages.appendChild(typingDiv);
+        chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+    }
+
+    function removeTypingIndicator() {
+        const typing = chatbotMessages.querySelector('.typing-message');
+        if (typing) typing.remove();
+    }
+
+    // Bot responses based on keywords
+    function getBotResponse(message) {
+        const msg = message.toLowerCase();
+        
+        // Greetings
+        if (msg.includes('hello') || msg.includes('hi') || msg.includes('hey')) {
+            return "Hello! 👋 Welcome to PrintEase! I'm here to help you with your printing needs. What would you like to know about our products?";
+        }
+        
+        // Price inquiries
+        if (msg.includes('price') || msg.includes('cost') || msg.includes('how much')) {
+            return "Our prices are very affordable! 💰 Custom stickers start at ₱10, button pins at ₱50, keychains at ₱100, and more! Would you like to see our full catalog?";
+        }
+        
+        // Products
+        if (msg.includes('product') || msg.includes('what do you sell') || msg.includes('items')) {
+            return "We offer a variety of custom printed products! 🎨 Including: Custom Stickers, Button Pins, Ballpens, Keychains, and Name Tags/IDs. Which one interests you?";
+        }
+        
+        // Stickers
+        if (msg.includes('sticker')) {
+            return "Our custom stickers are high-quality and fully customizable! ✨ Perfect for personal use, events, or business branding. Starting at just ₱10! Want to place an order?";
+        }
+        
+        // Pins
+        if (msg.includes('pin') || msg.includes('button')) {
+            return "Button pins are perfect for expressing yourself! 📌 Great for collections, events, or gifts. Starting at ₱50. Would you like to see designs?";
+        }
+        
+        // Orders
+        if (msg.includes('order') || msg.includes('buy') || msg.includes('purchase')) {
+            return "To place an order, simply browse our shop and add items to your cart! 🛒 You can also submit custom designs through our design submission form. Need help navigating?";
+        }
+        
+        // Custom design
+        if (msg.includes('custom') || msg.includes('design') || msg.includes('personalize')) {
+            return "We love custom designs! 🎨 You can upload your own designs through our 'Submit Your Design' feature in the shop page. Our team will review and contact you within 24 hours!";
+        }
+        
+        // Delivery
+        if (msg.includes('deliver') || msg.includes('shipping') || msg.includes('ship')) {
+            return "We offer reliable delivery services! 🚚 Shipping fee is ₱50 flat rate. Orders are typically processed within 2-3 business days. Where would you like to ship to?";
+        }
+        
+        // Payment
+        if (msg.includes('payment') || msg.includes('pay') || msg.includes('cash')) {
+            return "We accept multiple payment methods! 💳 Cash on Delivery, GCash, PayMaya, and Bank Transfer. Choose what's most convenient for you at checkout!";
+        }
+        
+        // Contact
+        if (msg.includes('contact') || msg.includes('reach') || msg.includes('talk')) {
+            return "You can reach us at: 📞 +63 912 345 6789 or 📧 printease@example.com. We're located at #21 Lt. Tiamsic St. Brgy. Tabacalera, Pateros. How else can I assist you?";
+        }
+        
+        // Agent/human
+        if (msg.includes('agent') || msg.includes('human') || msg.includes('person') || msg.includes('representative')) {
+            return "I'm connecting you to our customer service team... 👤 Meanwhile, you can also reach us directly at +63 912 345 6789 or printease@example.com for immediate assistance!";
+        }
+        
+        // Thanks
+        if (msg.includes('thank') || msg.includes('thanks')) {
+            return "You're welcome! 😊 Is there anything else I can help you with today?";
+        }
+        
+        // Bye
+        if (msg.includes('bye') || msg.includes('goodbye')) {
+            return "Thank you for chatting with PrintEase! 👋 Feel free to reach out anytime. Have a great day!";
+        }
+        
+        // Default response
+        return "I'm here to help! 🤖 You can ask me about our products, prices, ordering process, delivery, or anything else. What would you like to know?";
+    }
+}
 
 // Mobile Menu Toggle
 function initMobileMenu() {
@@ -50,7 +325,6 @@ function initAddToCart() {
                 quantity: 1
             };
             
-            console.log('Adding product to cart:', product); // Debug log
             addToCart(product);
         });
     });
@@ -70,7 +344,6 @@ function addToCart(product) {
     saveCart();
     updateCartCount();
     
-    // If on the cart page, update the display immediately
     if (window.location.pathname.includes('cart.html')) {
         displayCart();
     }
@@ -78,7 +351,6 @@ function addToCart(product) {
 
 function saveCart() {
     localStorage.setItem('printease_cart', JSON.stringify(cart));
-    console.log('Cart saved:', cart); // Debug log
 }
 
 function updateCartCount() {
@@ -92,9 +364,8 @@ function updateCartCount() {
 }
 
 // ============================================
-// CART PAGE FUNCTIONS (for cart.html) - FIXED
+// CART PAGE FUNCTIONS
 // ============================================
-
 function displayCart() {
     const itemsContainer = document.getElementById('cartItems');
     const cartContent = document.getElementById('cartContent');
@@ -103,8 +374,6 @@ function displayCart() {
     if (!itemsContainer || !cartContent) return;
 
     itemsContainer.innerHTML = '';
-    
-    console.log('Displaying cart:', cart); // Debug log
     
     if (cart.length === 0) {
         emptyMessage.style.display = 'flex';
@@ -116,28 +385,18 @@ function displayCart() {
     cartContent.style.display = 'grid';
 
     cart.forEach(item => {
-        console.log('Rendering cart item:', item); // Debug log
-        
         const itemElement = document.createElement('div');
         itemElement.className = 'cart-item';
         
-        // Create image element programmatically for better error handling
         const imageDiv = document.createElement('div');
         imageDiv.className = 'cart-item-image';
         
         const img = document.createElement('img');
         img.alt = item.name;
-        
-        // Log the image path for debugging
-        console.log('Loading image from path:', item.image);
-        
-        img.onload = function() {
-            console.log('✓ Image loaded successfully:', item.image);
-        };
+        img.src = item.image;
+        img.style.cssText = 'width: 100%; height: 100%; object-fit: cover; border-radius: 8px; display: block;';
         
         img.onerror = function() {
-            console.error('✗ Image failed to load:', item.image);
-            console.log('Current page location:', window.location.pathname);
             this.style.display = 'none';
             const placeholder = document.createElement('div');
             placeholder.style.cssText = 'width: 100%; height: 100%; background: linear-gradient(135deg, #e5e7eb 0%, #d1d5db 100%); display: flex; flex-direction: column; align-items: center; justify-content: center; border-radius: 8px; color: #6b7280;';
@@ -145,12 +404,8 @@ function displayCart() {
             this.parentElement.appendChild(placeholder);
         };
         
-        // Set the image source
-        img.src = item.image;
-        img.style.cssText = 'width: 100%; height: 100%; object-fit: cover; border-radius: 8px; display: block;';
         imageDiv.appendChild(img);
         
-        // Create details section
         const detailsDiv = document.createElement('div');
         detailsDiv.className = 'cart-item-details';
         detailsDiv.innerHTML = `
@@ -163,7 +418,6 @@ function displayCart() {
             </div>
         `;
         
-        // Create total section
         const totalDiv = document.createElement('div');
         totalDiv.className = 'cart-item-total';
         totalDiv.innerHTML = `
@@ -171,13 +425,11 @@ function displayCart() {
             <p class="total-price">₱${(item.price * item.quantity).toFixed(2)}</p>
         `;
         
-        // Create remove button
         const removeBtn = document.createElement('button');
         removeBtn.className = 'remove-btn';
         removeBtn.innerHTML = '<i class="fas fa-trash-alt"></i>';
         removeBtn.onclick = () => removeItem(item.id);
         
-        // Append all elements
         itemElement.appendChild(imageDiv);
         itemElement.appendChild(detailsDiv);
         itemElement.appendChild(totalDiv);
@@ -189,7 +441,6 @@ function displayCart() {
     updateSummary();
 }
 
-// Update Quantity Function
 function updateQuantity(productId, change) {
     const product = cart.find(item => item.id === productId);
     
@@ -206,7 +457,6 @@ function updateQuantity(productId, change) {
     }
 }
 
-// Remove Item Function
 function removeItem(productId) {
     cart = cart.filter(item => item.id !== productId);
     saveCart();
@@ -226,7 +476,6 @@ function updateSummary() {
     if (subtotalElement) subtotalElement.textContent = `₱${subtotal.toFixed(2)}`;
     if (totalElement) totalElement.textContent = `₱${total.toFixed(2)}`;
     
-    // Update Checkout Modal Summary
     const checkoutSubtotal = document.getElementById('checkoutSubtotal');
     const checkoutTotal = document.getElementById('checkoutTotal');
     
@@ -239,7 +488,6 @@ function updateSummary() {
     }
 }
 
-// Initialize Checkout
 function initCheckout() {
     const checkoutBtn = document.getElementById('checkoutBtn');
     const checkoutModal = document.getElementById('checkoutModal');
@@ -267,7 +515,6 @@ function initCheckout() {
         }
     });
 
-    // Form Submission
     if (checkoutForm) {
         checkoutForm.addEventListener('submit', function(e) {
             e.preventDefault();
@@ -279,24 +526,10 @@ function initCheckout() {
                 return;
             }
             
-            const fullName = document.getElementById('fullName').value;
-            const email = document.getElementById('emailCheckout').value;
-            const phone = document.getElementById('phone').value;
-            const address = document.getElementById('address').value;
-            
-            console.log('Order Details:', {
-                customer: { fullName, email, phone, address },
-                payment: selectedPayment.value,
-                items: cart,
-                total: cart.reduce((sum, item) => sum + (item.price * item.quantity), 0) + 50
-            });
-            
-            // Hide form and show success message
             checkoutForm.style.display = 'none';
             const orderSuccess = document.getElementById('orderSuccess');
             orderSuccess.style.display = 'block';
             
-            // Clear cart after 3 seconds and redirect
             setTimeout(function() {
                 cart = [];
                 saveCart();
@@ -309,7 +542,7 @@ function initCheckout() {
 }
 
 // ============================================
-// DESIGN SUBMISSION MODAL FUNCTIONS (for shop.html)
+// DESIGN SUBMISSION MODAL
 // ============================================
 function initDesignModal() {
     const modal = document.getElementById('designModal');
@@ -394,13 +627,6 @@ function initDesignModal() {
         submitBtn.disabled = true;
 
         setTimeout(() => {
-            console.log('--- Custom Design Request Submission ---');
-            console.log(`Item Type: ${itemType}`);
-            console.log(`Quantity: ${quantity}`);
-            console.log(`Customer Email: ${email}`);
-            console.log(`Notes: ${notes}`);
-            console.log(`File: ${file.name} (${(file.size / 1024).toFixed(2)} KB)`);
-
             showDesignFormMessage('Your design request has been sent! We will contact you via email soon.', 'success');
             
             setTimeout(() => {
@@ -433,7 +659,6 @@ function initDesignModal() {
 // ============================================
 // UTILITY/NOTIFICATION
 // ============================================
-
 function showNotification(message, type) {
     const notification = document.createElement('div');
     notification.className = `notification ${type}`;
@@ -465,130 +690,15 @@ function showNotification(message, type) {
     }, 3000);
 }
 
-// Add CSS animations
 const style = document.createElement('style');
 style.textContent = `
     @keyframes slideIn {
-        from {
-            transform: translateX(400px);
-            opacity: 0;
-        }
-        to {
-            transform: translateX(0);
-            opacity: 1;
-        }
+        from { transform: translateX(400px); opacity: 0; }
+        to { transform: translateX(0); opacity: 1; }
     }
     @keyframes slideOut {
-        from {
-            transform: translateX(0);
-            opacity: 1;
-        }
-        to {
-            transform: translateX(400px);
-            opacity: 0;
-        }
+        from { transform: translateX(0); opacity: 1; }
+        to { transform: translateX(400px); opacity: 0; }
     }
 `;
 document.head.appendChild(style);
-/* ============================================
-   FLOATING STICKERS JAVASCRIPT
-   Add this code to the end of main.js
-============================================ */
-
-// Floating Stickers - Only on Homepage
-function initFloatingStickers() {
-    // Only run on index.html
-    if (!window.location.pathname.includes('index.html') && window.location.pathname !== '/') {
-        return;
-    }
-
-    const floatingContainer = document.getElementById('floatingStickers');
-    if (!floatingContainer) return;
-
-    const stickers = floatingContainer.querySelectorAll('.floating-sticker');
-    
-    // Store initial positions
-    const stickerData = [];
-    stickers.forEach((sticker, index) => {
-        const rect = sticker.getBoundingClientRect();
-        stickerData.push({
-            element: sticker,
-            initialTop: rect.top + window.scrollY,
-            speed: 0.3 + (index * 0.05) // Different speeds for each sticker
-        });
-    });
-
-    // Scroll effect
-    let ticking = false;
-    
-    window.addEventListener('scroll', function() {
-        if (!ticking) {
-            window.requestAnimationFrame(function() {
-                updateStickerPositions();
-                ticking = false;
-            });
-            ticking = true;
-        }
-    });
-
-    function updateStickerPositions() {
-        const scrollY = window.scrollY;
-        
-        stickerData.forEach(data => {
-            // Calculate parallax effect
-            const offset = scrollY * data.speed;
-            data.element.style.transform = `translateY(${offset}px)`;
-        });
-    }
-
-    // Mouse move effect for extra interactivity (optional)
-    let mouseX = 0;
-    let mouseY = 0;
-    let currentX = 0;
-    let currentY = 0;
-
-    document.addEventListener('mousemove', function(e) {
-        mouseX = e.clientX / window.innerWidth - 0.5;
-        mouseY = e.clientY / window.innerHeight - 0.5;
-    });
-
-    // Smooth animation loop for mouse effect
-    function animateStickers() {
-        // Smoothly interpolate current position towards target
-        currentX += (mouseX - currentX) * 0.05;
-        currentY += (mouseY - currentY) * 0.05;
-
-        stickerData.forEach((data, index) => {
-            const scrollY = window.scrollY;
-            const scrollOffset = scrollY * data.speed;
-            
-            // Add subtle mouse parallax (smaller effect)
-            const mouseOffsetX = currentX * (10 + index * 5);
-            const mouseOffsetY = currentY * (10 + index * 5);
-            
-            data.element.style.transform = `
-                translateY(${scrollOffset}px) 
-                translateX(${mouseOffsetX}px)
-            `;
-        });
-
-        requestAnimationFrame(animateStickers);
-    }
-
-    animateStickers();
-}
-
-// Update the DOMContentLoaded event listener
-document.addEventListener('DOMContentLoaded', function() {
-    updateCartCount();
-    initMobileMenu();
-    initAddToCart();
-    initDesignModal();
-    initFloatingStickers(); // Add this line
-    
-    // Initialize cart page if on cart.html
-    if (window.location.pathname.includes('cart.html')) {
-        displayCart();
-        initCheckout();
-    }
-});
